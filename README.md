@@ -29,9 +29,40 @@ yq --version
 ---
 
 ## Installation
+
+You can install `cldkctl` in several ways:
+
+### Install via Homebrew (macOS & Linux)
+```sh
+brew tap Lintasarta/cldkctl https://github.com/Lintasarta/cldkctl.git
+brew install cldkctl
+```
+
+Verify installation:
+```sh
+cldkctl --version
+```
+
+---
+
+### Install via Snap (Linux)
+```sh
+sudo snap install cldkctl
+```
+
+Verify installation:
+```sh
+cldkctl --version
+```
+
+---
+
+### Manual Binary Installation
+
 You can download the latest `cldkctl` binary from the [GitHub Releases](https://github.com/lintasarta/cldkctl/releases/latest).
 
-### Step 1: Download the Binary
+#### Step 1: Download the Binary
+
 Go to the **latest release page** and download the appropriate binary for your OS and architecture:
 
 | OS         | Architecture | File Format |
@@ -45,28 +76,26 @@ Go to the **latest release page** and download the appropriate binary for your O
 | Windows    | i386        | `.zip`      |
 | Windows    | x86_64      | `.zip`      |
 
-#### Example (Linux/macOS)
+##### Example (Linux/macOS)
 ```sh
-wget https://github.com/Lintasarta/ai-cldkctl/releases/download/v<VERSION>/cldkctl-<VERSION>_<OS>_<ARCH>.tar.gz
+wget https://github.com/Lintasarta/cldkctl/releases/download/v<VERSION>/cldkctl-<VERSION>_<OS>_<ARCH>.tar.gz
 ```
 
 Or download and extract in one line:
 ```sh
-curl -L https://github.com/Lintasarta/ai-cldkctl/releases/download/v<VERSION>/cldkctl-<VERSION>_<OS>_<ARCH>.tar.gz | tar xz
+curl -L https://github.com/Lintasarta/cldkctl/releases/download/v<VERSION>/cldkctl-<VERSION>_<OS>_<ARCH>.tar.gz | tar xz
 ```
 
----
+#### Step 2: Extract and Install
 
-### Step 2: Extract and Install
-
-#### On Linux & macOS
+##### On Linux & macOS
 ```sh
 tar -xvzf cldkctl-<VERSION>-<OS>_<ARCH>.tar.gz
 chmod +x cldkctl
 sudo mv cldkctl /usr/local/bin/
 ```
 
-#### On Windows
+##### On Windows
 1. Extract the ZIP file.
 2. Move `cldkctl.exe` to a directory in your `PATH` (e.g., `C:\Program Files\cldkctl\`).
 3. Add this directory to the system `PATH` if necessary.
@@ -75,7 +104,6 @@ Verify installation:
 ```sh
 cldkctl --version
 ```
-
 ---
 ## Authenticating with Cloudeka
 
