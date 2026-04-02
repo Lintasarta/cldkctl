@@ -5,7 +5,7 @@
 class Cldkctl < Formula
   desc "A CLI tool for managing cloud infrastructure"
   homepage "https://github.com/Lintasarta/cldkctl"
-  version "0.0.3"
+  version "0.0.4"
   license "MIT"
 
   depends_on "go"
@@ -13,18 +13,18 @@ class Cldkctl < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/Lintasarta/cldkctl/releases/download/v0.0.3/cldkctl-0.0.3_Darwin_x86_64.tar.gz"
-      sha256 "86247ff6c16f02ee582fe73c9c2c7f9854c0a33db95cb471de304c289dd9db27"
+      url "https://github.com/Lintasarta/cldkctl/releases/download/v0.0.4/cldkctl-0.0.4_Darwin_x86_64.tar.gz"
+      sha256 "f78425853978d6e1d4bc74f075729f8339af5077a34cdd2be257a3957626e7f3"
 
-      def install
+      define_method(:install) do
         bin.install "cldkctl"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/Lintasarta/cldkctl/releases/download/v0.0.3/cldkctl-0.0.3_Darwin_arm64.tar.gz"
-      sha256 "567f8777ce5c61af17fe02261384860331e4454426bb698b4bdb8504be7f216d"
+      url "https://github.com/Lintasarta/cldkctl/releases/download/v0.0.4/cldkctl-0.0.4_Darwin_arm64.tar.gz"
+      sha256 "98c8b16ee8c66d8b768b516d4bf4c0a665fe3119065bddf2df06f2c305aeea7f"
 
-      def install
+      define_method(:install) do
         bin.install "cldkctl"
       end
     end
@@ -32,16 +32,16 @@ class Cldkctl < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/Lintasarta/cldkctl/releases/download/v0.0.3/cldkctl-0.0.3_Linux_x86_64.tar.gz"
-      sha256 "6fde56ff7de1d917988f1aef5e0c9a1953b334c69ec709648ad58953de124eb2"
-      def install
+      url "https://github.com/Lintasarta/cldkctl/releases/download/v0.0.4/cldkctl-0.0.4_Linux_x86_64.tar.gz"
+      sha256 "a04f410b041dea104ee9c9dd73745432caaddb07ebbc0f78da972058462dbb9b"
+      define_method(:install) do
         bin.install "cldkctl"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/Lintasarta/cldkctl/releases/download/v0.0.3/cldkctl-0.0.3_Linux_arm64.tar.gz"
-      sha256 "9b224fca5e0e070bf80e2679ec1341585b524ff659e16bc5b04bf73d5440bb34"
-      def install
+      url "https://github.com/Lintasarta/cldkctl/releases/download/v0.0.4/cldkctl-0.0.4_Linux_arm64.tar.gz"
+      sha256 "c913745c96b05becd769010dbecce90348d2a0da229ba9c94276649e88da9931"
+      define_method(:install) do
         bin.install "cldkctl"
       end
     end
