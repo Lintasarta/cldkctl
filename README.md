@@ -1,27 +1,30 @@
 # cldkctl
-`cldkctl` is a command-line interface (CLI) for interacting with Cloudeka AI API.
+
+`cldkctl` is a command-line interface (CLI) for interacting with Cloudeka by Lintasarta services.
 
 ## Prerequisites
+
 Before installing `cldkctl`, ensure you have `yq` installed. `yq` is required for YAML processing.
 
 ### Install `yq`
+
 #### On Linux
 ```sh
 sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
 sudo chmod +x /usr/local/bin/yq
 ```
 
-#### On macOS (Using Homebrew)
+#### On macOS (Homebrew)
 ```sh
 brew install yq
 ```
 
-#### On Windows (Using Chocolatey)
+#### On Windows (Chocolatey)
 ```sh
 choco install yq
 ```
 
-Verify installation:
+Verify:
 ```sh
 yq --version
 ```
@@ -30,150 +33,241 @@ yq --version
 
 ## Installation
 
-You can install `cldkctl` in several ways:
-
-### Install via Homebrew (macOS & Linux)
+### Homebrew (macOS & Linux)
 ```sh
 brew tap Lintasarta/cldkctl https://github.com/Lintasarta/cldkctl.git
 brew install cldkctl
 ```
 
-Verify installation:
-```sh
-cldkctl --version
-```
-
----
-
-### Install via Snap (Linux)
+### Snap (Linux)
 ```sh
 sudo snap install cldkctl
 ```
 
-Verify installation:
-```sh
-cldkctl --version
-```
+### Manual (all platforms)
 
----
+Download the latest binary from [GitHub Releases](https://github.com/lintasarta/cldkctl/releases/latest).
 
-### Manual Binary Installation
+| OS      | Architecture | Format   |
+|---------|-------------|----------|
+| macOS   | arm64       | `.tar.gz` |
+| macOS   | x86_64      | `.tar.gz` |
+| Linux   | arm64       | `.tar.gz` |
+| Linux   | i386        | `.tar.gz` |
+| Linux   | x86_64      | `.tar.gz` |
+| Windows | arm64       | `.zip`   |
+| Windows | i386        | `.zip`   |
+| Windows | x86_64      | `.zip`   |
 
-You can download the latest `cldkctl` binary from the [GitHub Releases](https://github.com/lintasarta/cldkctl/releases/latest).
-
-#### Step 1: Download the Binary
-
-Go to the **latest release page** and download the appropriate binary for your OS and architecture:
-
-| OS         | Architecture | File Format |
-|------------|-------------|-------------|
-| macOS      | arm64       | `.tar.gz`   |
-| macOS      | x86_64      | `.tar.gz`   |
-| Linux      | arm64       | `.tar.gz`   |
-| Linux      | i386        | `.tar.gz`   |
-| Linux      | x86_64      | `.tar.gz`   |
-| Windows    | arm64       | `.zip`      |
-| Windows    | i386        | `.zip`      |
-| Windows    | x86_64      | `.zip`      |
-
-##### Example (Linux/macOS)
-```sh
-wget https://github.com/Lintasarta/cldkctl/releases/download/v<VERSION>/cldkctl-<VERSION>_<OS>_<ARCH>.tar.gz
-```
-
-Or download and extract in one line:
+**Linux/macOS:**
 ```sh
 curl -L https://github.com/Lintasarta/cldkctl/releases/download/v<VERSION>/cldkctl-<VERSION>_<OS>_<ARCH>.tar.gz | tar xz
-```
-
-#### Step 2: Extract and Install
-
-##### On Linux & macOS
-```sh
-tar -xvzf cldkctl-<VERSION>-<OS>_<ARCH>.tar.gz
 chmod +x cldkctl
 sudo mv cldkctl /usr/local/bin/
 ```
 
-##### On Windows
-1. Extract the ZIP file.
-2. Move `cldkctl.exe` to a directory in your `PATH` (e.g., `C:\Program Files\cldkctl\`).
-3. Add this directory to the system `PATH` if necessary.
+**Windows:** Extract the ZIP and move `cldkctl.exe` to a directory in your `PATH`.
 
-Verify installation:
+Verify:
 ```sh
 cldkctl --version
 ```
+
 ---
-## Authenticating with Cloudeka
 
-Before using `cldkctl`, you must authenticate with your Cloudeka access token.
+## Quick Start
 
-You can do this in two ways:
-
-#### 1. Provide the token directly:
+### 1. Authenticate
 ```sh
-cldkctl auth your_cldkctl_token
+cldkctl auth <your-token>
 ```
-
-#### 2. Use interactive prompt:
+Or use interactive mode:
 ```sh
 cldkctl auth
 ```
-You'll be prompted to enter your Cloudeka access token:
 
-```
-❯ Enter your token: cldk_  ✡ required
-```
-
----
-
-### Available Commands
+### 2. List your organizations and projects
 ```sh
-cldkctl is a command line interface to interact with Cloudeka service.
+cldkctl organization list
+cldkctl project list
+```
 
-Usage:
-  cldkctl [flags]
-  cldkctl [command]
+### 3. Set defaults (recommended)
+```sh
+cldkctl <command> --default-project <project-id> --organization <org-id>
+```
 
-Available Commands:
-  auth         Log in to the Cloudeka service using your token
-  balance      View the balance for each project
-  billing      View project billing details
-  completion   Generate the autocompletion script for the specified shell
-  help         Help about any command
-  kubernetes   Manage Kubernetes resources
-  logs         View and manage activity logs in the organizations cloud
-  notebook     Manage Notebooks
-  organization Manage organization details, members, and roles
-  profile      View and manage your profile information
-  project      View and manage your projects
-  registry     Manage your container registry
-  token        View and manage your Cloudeka authentication tokens
-  vm           Manage virtual machines (VMs)
-  voucher      Manage project vouchers and credit balances
-
-Flags:
-  -U, --base-url string            Base URL for API requests
-  -N, --default-namespace string   Set a default namespace (default "default")
-  -P, --default-project string     Set a default project ID to avoid repeated entries
-  -R, --default-registry string    Set a default registry
-      --editor string              Set a default editor (default "vim")
-  -h, --help                       help for cldkctl
-      --max-retries int            Maximum number of retries for HTTP requests (default 3)
-  -O, --organization string        Set an organization
-  -t, --toggle                     Help message for toggle
-      --version                    Version information
-
-Use "cldkctl [command] --help" for more information about a command.
+### 4. Create a flexi instance (interactive TUI)
+```sh
+cldkctl flexi instance create --interactive=true
 ```
 
 ---
 
-## Updating `cldkctl`
-To update to the latest version, download the new binary from [GitHub Releases](https://github.com/lintasarta/cldkctl/releases/latest) and follow the installation steps again.
+## Global Flags
 
-For Linux/macOS, you can replace the existing binary:
+These flags work on any command and can be used to avoid repeating common values:
+
+| Flag                       | Default | Description                                    |
+|----------------------------|---------|------------------------------------------------|
+| `-P, --default-project`    | `""`    | Default project ID                             |
+| `-O, --organization`       | `""`    | Organization ID                                |
+| `--max-retries`            | `3`     | Max retries for HTTP requests                  |
+| `--http-timeout`           | `30`    | HTTP request timeout in seconds                |
+
+> **Note:** Boolean flags such as `--interactive`, `--auto-confirm`, and `--enabled` are **string** flags and accept `true` or `false` as values (e.g. `--interactive=true`, `-i=true`). They do not support bare `-i` (without a value) syntax.
+
+---
+
+## Command Reference
+
+### Compute — Flexi Instances
+
+`cldkctl flexi instance`
+
+| Command            | Description                                       |
+|--------------------|---------------------------------------------------|
+| `list`             | List all flexi instances                          |
+| `detail [name]`    | Show instance details (accepts name or ID)        |
+| `create`           | Create a new flexi instance                       |
+| `delete [name]`    | Delete a flexi instance                           |
+| `start [name]`     | Start a stopped instance                          |
+| `stop [name]`      | Stop a running instance                           |
+| `reboot [name]`    | Reboot an instance (soft/hard)                    |
+| `rebuild [name]`   | Rebuild an instance (recreate OS, keep data)      |
+| `resize [name]`    | Resize an instance (change flavor)                |
+| `resize-root-disk` | Resize the root disk                              |
+| `rename [name]`    | Rename an instance                                |
+| `console [name]`   | Get console URL                                   |
+| `attach-interface` | Attach a network interface                        |
+| `detach-interface` | Detach a network interface                        |
+| `add-floatingip`   | Add a floating IP                                 |
+| `ssh`              | Manage SSH public keys (list/add/delete)          |
+| `create-cluster`   | Create an instance cluster                        |
+
+> Most `--*-id` flags accept names as alternatives to UUIDs (e.g. `--vpc-id my-vpc`, `--flavor-id "2vCPU-4GB"`).
+
+### Compute — Claw (GoClaw) Instances
+
+`cldkctl claw instance`
+
+| Command            | Description                         |
+|--------------------|-------------------------------------|
+| `list`             | List all claw instances             |
+| `detail [name]`    | Show instance details               |
+| `create`           | Create a new claw instance          |
+| `delete [name]`    | Delete a claw instance              |
+| `preview [name]`   | Preview instance configuration      |
+| `ssh-key [name]`   | Get SSH key                         |
+| `api-key [name]`   | Get API key                         |
+| `provider`         | Manage LLM providers                |
+| `agent`            | Manage agents                       |
+| `channel`          | Manage communication channels       |
+| `skill`            | Manage skills (upload/list/update)  |
+
+### Flexi Networking
+
+`cldkctl flexi network`
+
+| Subcommand   | Commands                           |
+|-------------|------------------------------------|
+| `vpc`       | `list`, `create`, `detail`, `update`, `delete` |
+| `subnet`    | `list`, `create`, `detail`, `update`, `delete` |
+| `port`      | `list`, `create`, `detail`, `update`, `delete` |
+| `floatingip`| `list`, `create`, `delete`, `unassign`, `reassign` |
+
+> VPC, subnet, port, and floating IP flags accept names in addition to UUIDs.
+
+### Flexi Storage
+
+`cldkctl flexi storage`
+
+| Command                     | Description                        |
+|-----------------------------|------------------------------------|
+| `list`                      | List storage volumes               |
+| `create`                    | Create a new storage volume        |
+| `detail [id-or-name]`       | Show volume details                |
+| `delete [id-or-name]`       | Delete a storage volume            |
+| `attach [id-or-name]`       | Attach to a compute instance       |
+| `detach [id-or-name]`       | Detach from a compute instance     |
+| `resize [id-or-name]`       | Resize a storage volume            |
+| `sync [id-or-name]`         | Sync a storage volume              |
+
+### Flexi Image
+
+`cldkctl flexi image`
+
+| Command                    | Description                          |
+|----------------------------|--------------------------------------|
+| `list`                     | List images                          |
+| `available`                | List available OS images             |
+| `detail [id-or-name]`      | Show image details                   |
+| `delete [id-or-name]`      | Delete an image                      |
+| `snapshot-vm`              | Snapshot a VM as an image            |
+| `snapshot-storage`         | Snapshot storage as an image         |
+| `snapshot-restore`         | Restore a snapshot                   |
+| `custom-image`             | Create a custom image                |
+| `backup-scheduler`         | Create a backup scheduler            |
+| `backup-scheduler-list`    | List backup schedulers               |
+| `backup-scheduler-delete`  | Delete a backup scheduler            |
+| `backup-list`              | List backups                         |
+
+### Flexi Security Groups
+
+`cldkctl flexi security`
+
+| Command                     | Description                        |
+|-----------------------------|------------------------------------|
+| `list`                      | List security groups               |
+| `create`                    | Create a security group            |
+| `update [id-or-name]`       | Update a security group            |
+| `delete [id-or-name]`       | Delete a security group            |
+
+### Flexi Reference Commands
+
+| Command              | Description                    |
+|----------------------|--------------------------------|
+| `flexi flavor list`  | List instance flavors/sizes    |
+| `flexi disk-type list` | List disk types               |
+| `flexi disk-type list-size` | List disk size packages  |
+| `flexi region list`  | List available regions         |
+| `flexi region zone-list` | List availability zones    |
+| `zone list`          | List zones (top-level)         |
+
+---
+
+## Other Services
+
+| Command           | Description                              |
+|-------------------|------------------------------------------|
+| `balance`         | View balance per project                 |
+| `billing`         | View project billing details             |
+| `box`             | Object storage (Dekabox) — list/create/detail |
+| `dns`             | DNS record management                    |
+| `ssl`             | SSL certificate management               |
+| `vpn`             | VPN management (IPsec/OpenVPN)           |
+| `vm`              | Virtual machines (KubeVirt)              |
+| `llm`             | Large language model service             |
+| `baremetal`       | Bare metal server management             |
+| `guard`           | Project guard policies                   |
+| `ticket`          | Support ticket management                |
+| `backup-vm`       | VM backup management                     |
+| `vcluster`        | Virtual cluster management               |
+| `registry`        | Container registry (list/create/quota/helm) |
+| `notebook`        | Jupyter Notebook management              |
+| `kubernetes`      | Kubernetes resource management           |
+| `voucher-credit`  | Voucher credits (list/create/delete)     |
+| `voucher-trial`   | Trial vouchers (list/create/claim)       |
+| `token`           | Manage Cloudeka authentication tokens    |
+| `auditlog`        | Activity logs                            |
+| `completion`      | Generate shell autocompletion            |
+
+---
+
+## Updating
+
+Download the latest binary from [GitHub Releases](https://github.com/lintasarta/cldkctl/releases/latest) and replace the existing binary:
+
 ```sh
 sudo mv cldkctl /usr/local/bin/
 ```
@@ -181,5 +275,5 @@ sudo mv cldkctl /usr/local/bin/
 ---
 
 ## License
-This project is licensed under the MIT License.
 
+MIT License
